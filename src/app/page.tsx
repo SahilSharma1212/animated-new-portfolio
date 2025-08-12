@@ -1,6 +1,7 @@
+"use client"
 import { useEffect, useState } from "react";
-import HeroSectionPage from "./components/HeroSectionPage";
-import IntroSectionPage from "./components/IntroSectionPage";
+import HeroSectionPage from "./../components/HeroSectionPage";
+import IntroSectionPage from "./../components/IntroSectionPage"
 import { motion } from "framer-motion";
 
 function App() {
