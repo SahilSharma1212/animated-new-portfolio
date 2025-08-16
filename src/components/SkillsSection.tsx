@@ -1,7 +1,8 @@
 "use client"
 import {
   FaReact, FaNodeJs, FaGitAlt, FaFigma, FaPython, FaJava, FaFileExcel, FaJsSquare,
-  FaHtml5
+  FaHtml5,
+  FaFire
 } from "react-icons/fa";
 import {
   SiMongodb, SiTailwindcss, SiNextdotjs, SiTypescript, SiCplusplus, SiPandas,
@@ -10,6 +11,7 @@ import {
 import { MdDashboard, MdMemory } from "react-icons/md";
 import { motion } from 'framer-motion';
 import { GiToken } from "react-icons/gi";
+import { FaBoltLightning } from "react-icons/fa6";
 
 
 const categorizedSkills = {
@@ -58,6 +60,16 @@ const categorizedSkills = {
       icon: <SiMongodb size={40} className="text-green-600" />,
       expertise: "Advanced"
     },
+    {
+      name:"Firebase",
+      icon: <FaFire size={40} className="text-yellow-600" />,
+      expertise:"Proficient"
+    },
+    {
+      name:"Supabase",
+      icon: <FaBoltLightning size={40} className="text-emerald-500" />,
+      expertise:"Proficient"
+    }
   ],
   "Authentication": [
     {
@@ -216,7 +228,7 @@ export default function SkillsSection() {
         <div className="md:hidden flex flex-col gap-8">
           {entries.map(([category, skills], idx) => (
             <motion.div
-              key={category}
+              key={idx}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
