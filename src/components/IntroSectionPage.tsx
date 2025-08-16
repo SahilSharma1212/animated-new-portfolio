@@ -17,9 +17,9 @@ export default function IntroSectionPage() {
   return (
     <div className="relative bg-gradient-to-b from-gray-950 via-slate-950 to-[hsl(240,27%,6%)] h-screen flex items-end gap-8 px-10 overflow-hidden">
       {/* 🔤 Typewriter Overlay using react-typewriter-effect */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 text-3xl sm:text-4xl font-semibold whitespace-nowrap text-cyan-500 shadow-lg shadow-cyan-500/40 text-shadow-lg text-shadow-cyan-500/40">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 text-3xl sm:text-4xl font-semibold whitespace-nowrap text-cyan-500 shadow-lg shadow-cyan-500/40 text-shadow-lg text-shadow-cyan-500/40 max-sm:w-screen wrap-break-word text-center">
         <Typewriter
-          words={['Launching portfolio in a moment...']}
+          words={['Launching portfolio...']}
           loop={0}
           cursor
           cursorStyle="|"

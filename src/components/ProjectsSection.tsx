@@ -3,21 +3,22 @@ import { useState } from "react";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const ProjectDetails = [
+
     {
-        title: "Drawing App",
+        title: "E-Malkhana",
         description:
-            "A feature-rich web-based drawing application designed for creative freedom. Users can draw with various brush sizes and colors, erase, undo/redo actions, and export their artwork as images. Built using the Canvas API and optimized for performance in modern browsers. Designed with a clean, intuitive UI and fully responsive for mobile/tablet use.",
-        tech: ["React", "Canvas API", "Tailwind", "Konva", "Framer-Motions"],
+            "Digital Evidence Management System for law enforcement agencies, built with Next.js, Supabase, and TailwindCSS. The application enables secure storage and management of case-related evidence (images, PDFs) with advanced search capabilities, category-based filtering, and role-based access control. It includes automated file deletion from Supabase storage when records are removed, ensuring data consistency and security.",
+        tech: ["Next.js", "Supabase", "TailwindCSS", "ShadCn", "JWT", "REST API", "Firebase"],
         skills: [
-            "Canvas-based Drawing",
-            "Undo/Redo Logic",
-            "Image Exporting",
-            "Responsive UI Design",
-            "Konva State Management"
+            "Role-Based Access Control",
+            "Advanced Search & Filtering",
+            "Secure File Upload & Deletion",
+            "Supabase Storage Management",
+            "Responsive & Accessible UI"
         ],
-        github: "https://github.com/SahilSharma1212/drawing-app-using-Konva/",
-        live: "https://sahilsharma1212.github.io/drawing-app-using-Konva/",
-        images: ["/drawing_app_1.png", "/drawing_app_2.png", "/drawing_app_3.png"],
+        github: "https://github.com/SahilSharma1212/E-Malkhana",
+        live: "https://e-malkhana-smoky.vercel.app/",
+        images: ["/emalkhana1.png", "/emalkhana2.png", "/emalkhana3.png"],
     },
     {
         title: "AI Resume Builder",
@@ -34,6 +35,22 @@ const ProjectDetails = [
         github: "https://github.com/SahilSharma1212/Next.js-AI-Powered-Resume-Builder",
         live: "https://next-js-ai-powered-resume-builder-fwdy8bnnw.vercel.app/",
         images: ["/resume1.png", "/resume3.png", "/resume2.png"],
+    },
+    {
+        title: "Drawing App",
+        description:
+            "A feature-rich web-based drawing application designed for creative freedom. Users can draw with various brush sizes and colors, erase, undo/redo actions, and export their artwork as images. Built using the Canvas API and optimized for performance in modern browsers. Designed with a clean, intuitive UI and fully responsive for mobile/tablet use.",
+        tech: ["React", "Canvas API", "Tailwind", "Konva", "Framer-Motions"],
+        skills: [
+            "Canvas-based Drawing",
+            "Undo/Redo Logic",
+            "Image Exporting",
+            "Responsive UI Design",
+            "Konva State Management"
+        ],
+        github: "https://github.com/SahilSharma1212/drawing-app-using-Konva/",
+        live: "https://sahilsharma1212.github.io/drawing-app-using-Konva/",
+        images: ["/drawing_app_1.png", "/drawing_app_2.png", "/drawing_app_3.png"],
     },
     {
         title: "Budgeting App",
@@ -67,26 +84,10 @@ const ProjectDetails = [
         live: "",
         images: ["/sentiment1.png", "/sentiment2.png", "/sentiment3.png"],
     },
-    {
-        title: "E-Malkhana",
-        description:
-            "Digital Evidence Management System for law enforcement agencies, built with Next.js, Supabase, and TailwindCSS. The application enables secure storage and management of case-related evidence (images, PDFs) with advanced search capabilities, category-based filtering, and role-based access control. It includes automated file deletion from Supabase storage when records are removed, ensuring data consistency and security.",
-        tech: ["Next.js", "Supabase", "TailwindCSS", "ShadCn", "JWT", "REST API","Firebase"],
-        skills: [
-            "Role-Based Access Control",
-            "Advanced Search & Filtering",
-            "Secure File Upload & Deletion",
-            "Supabase Storage Management",
-            "Responsive & Accessible UI"
-        ],
-        github: "https://github.com/SahilSharma1212/E-Malkhana", // replace with actual repo if different
-        live: "https://e-malkhana-smoky.vercel.app/", // replace with actual deployed link
-        images: ["/emalkhana1.png", "/emalkhana2.png", "/emalkhana3.png"],
-    },
 ];
 
 export default function ProjectsSection() {
-    const [activeIndex, setActiveIndex] = useState(1);
+    const [activeIndex, setActiveIndex] = useState(0);
 
     return (
         <div className="flex flex-col items-center min-h-screen text-white px-6 py-16">
