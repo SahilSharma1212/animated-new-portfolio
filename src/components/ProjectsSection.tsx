@@ -80,7 +80,7 @@ const ProjectDetails = [
             "Streamlit UI Design",
             "CSV Parsing and Preprocessing"
         ],
-        github: "https://github.com/yourusername/drawing-web",
+        github: "https://github.com/SahilSharma1212/Scikit-Learn-mental-health-analysis",
         live: "",
         images: ["/sentiment1.png", "/sentiment2.png", "/sentiment3.png"],
     },
