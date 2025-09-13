@@ -2,16 +2,18 @@
 import {
   FaReact, FaNodeJs, FaGitAlt, FaFigma, FaPython, FaJava, FaFileExcel, FaJsSquare,
   FaHtml5,
-  FaFire
+  FaFire,
 } from "react-icons/fa";
 import {
   SiMongodb, SiTailwindcss, SiNextdotjs, SiTypescript, SiCplusplus, SiPandas,
-  SiNumpy, SiScikitlearn, SiSecurityscorecard, SiExpress
+  SiNumpy, SiScikitlearn, SiSecurityscorecard, SiExpress,
+  SiFramer
 } from "react-icons/si";
 import { MdDashboard, MdMemory } from "react-icons/md";
 import { motion } from 'framer-motion';
-import { GiToken } from "react-icons/gi";
+import { GiBrain, GiToken } from "react-icons/gi";
 import { FaBoltLightning } from "react-icons/fa6";
+import { BsBootstrap, BsDatabase } from "react-icons/bs";
 
 
 const categorizedSkills = {
@@ -27,14 +29,19 @@ const categorizedSkills = {
       expertise: "Advanced"
     },
     {
+      name:"Framer Motions",
+      icon:<SiFramer size={40} className="text-yellow-400" />,
+      expertise:"Proficient"
+    },
+    {
       name: "Tailwind CSS",
       icon: <SiTailwindcss size={40} className="text-slate-400" />,
       expertise: "Proficient"
     },
     {
-      name: "TypeScript",
-      icon: <SiTypescript size={40} className="text-blue-500" />,
-      expertise: "Proficient"
+      name:"Bootstrap",
+      icon:<BsBootstrap size={40} className="text-purple-600" />,
+      expertise:"Proficient"
     },
     {
       name: "HTML",
@@ -69,6 +76,11 @@ const categorizedSkills = {
       name:"Supabase",
       icon: <FaBoltLightning size={40} className="text-emerald-500" />,
       expertise:"Proficient"
+    },
+    {
+      name:"SQL",
+      icon:<BsDatabase size={40} className="text-blue-500"/>,
+      expertise:"Beginner",
     }
   ],
   "Authentication": [
@@ -83,7 +95,7 @@ const categorizedSkills = {
       expertise: "Advanced"
     }
   ],
-  "Programming Languages": [
+  "Programming Languages & Skills": [
     {
       name: "Python",
       icon: <FaPython size={40} className="text-yellow-400" />,
@@ -103,6 +115,11 @@ const categorizedSkills = {
       name: "JavaScript",
       icon: <FaJsSquare size={40} className="text-yellow-400" />,
       expertise: "Expert"
+    },
+    {
+      name: "TypeScript",
+      icon: <SiTypescript size={40} className="text-blue-500" />,
+      expertise: "Proficient"
     },
   ],
   "AI/ML & Data": [
@@ -128,6 +145,12 @@ const categorizedSkills = {
     },
   ],
   "Tools & Platforms": [
+    
+    {
+      name:"Gen AI",
+      icon:<GiBrain size={40} className="text-green-400"/>,
+      expertise:"Intermediate"
+    },
     {
       name: "Git",
       icon: <FaGitAlt size={40} className="text-orange-500" />,
@@ -156,8 +179,8 @@ export default function SkillsSection() {
   const entries = Object.entries(categorizedSkills);
 
   return (
-    <section className="w-full px-6 py-24 text-white relative z-30">
-      <h2 className="text-3xl font-bold text-center mb-16">⚙️ My Tech Stack Timeline</h2>
+    <section className="w-full px-6 py-18 pt-5 text-white relative z-30">
+      <h2 className="text-3xl font-bold text-center mb-8">⚙️ My Tech Stack Timeline</h2>
 
       <div className="relative">
         {/* Vertical Line - Desktop Only */}

@@ -1,8 +1,8 @@
 "use client"
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
-import { useEffect, useMemo, useRef } from 'react';
-import { IoBookOutline, IoCallOutline, IoHomeOutline, IoDocument } from "react-icons/io5";
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { IoBookOutline, IoHomeOutline, IoDocument } from "react-icons/io5";
 import { FaGithub, FaLinkedin, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 import { GrProjects } from 'react-icons/gr';
 import * as THREE from 'three';
@@ -11,7 +11,8 @@ import CollegeInfo, { BioInfo, BranchInfo, TypeWriterEffect } from "./InfoPage";
 import SkillsSection from "./SkillsSection";
 import ProjectsSection from "./ProjectsSection";
 import { motion } from "motion/react"
-import { SiVercel } from 'react-icons/si';
+import { RiRobot2Line } from 'react-icons/ri';
+import ChatBot from './ChatBot';
 
 
 function ParallaxCameraRig() {
@@ -156,6 +157,7 @@ function SocialMediaIconsRow() {
     pointer-events-none z-20
   `;
 
+
     return (
         <div className="flex max-xl:justify-center items-center gap-6 mt-6 max-md:mt-4">
             <div className="flex items-center gap-6 mt-6">
@@ -171,12 +173,12 @@ function SocialMediaIconsRow() {
 
                 <a href="tel:+918821809999" className="group relative">
                     <FaPhoneAlt className="text-green-400 text-2xl transition-transform duration-300 transform hover:scale-110" />
-                    <div className={tooltipStyle + "w-16"}>Call Me</div>
+                    <div className={tooltipStyle + " w-16"}>Call Me</div>
                 </a>
 
                 <a href="https://mail.google.com/mail/?view=cm&to=sahilbhaisharma1212@gmail.com" target="_blank" className="group relative">
                     <FaEnvelope className="text-red-400 text-2xl transition-transform duration-300 transform hover:scale-110" />
-                    <div className={tooltipStyle + "w-22"}>Send Email</div>
+                    <div className={tooltipStyle + " w-22"}>Send Email</div>
                 </a>
                 <a href="#" target="_blank" className="group relative">
                     <IoDocument className="text-gray-200 text-2xl transition-transform duration-300 transform hover:scale-110" />
@@ -192,6 +194,9 @@ function SocialMediaIconsRow() {
 
 // ---------------------- Main Component ----------------------
 function StarFieldWithLight() {
+
+    const [visibleSection, setVisibleSection] = useState("home");
+
     return (
         <div className="relative w-full min-h-screen bg-gradient-to-b from-gray-950 via-slate-950 to-[#0c0c15]">
 
@@ -211,33 +216,51 @@ function StarFieldWithLight() {
             {/* 🔵 Sidebar */}
             <nav className="fixed top-1/2 -translate-y-1/2 md:left-5 max-md:top-14 max-md:left-1/2 max-md:-translate-left-1/2 max-md:flex-row z-50 bg-gradient-to-br from-gray-500/10 to-slate-600/10 backdrop-blur-sm rounded-2xl px-3 py-6 shadow-lg border border-white/10 md:hover:w-30 md:w-12 transition-all overflow-x-hidden max-xl:hidden">
                 <ul className="flex justify-between items-start text-sm md:text-base text-gray-400 md:flex-col gap-7 pl-1">
-                    <a href='#profile' className="hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all"><IoHomeOutline /> <p className='max-md:hidden'>About</p></a>
-                    <a href="#projectsSection" className="hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all"><GrProjects /><p className='max-md:hidden'>Projects</p></a>
-                    <a href='#skillsSection' className="hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all"><IoBookOutline /><p className='max-md:hidden'>Skills</p></a>
+                    <button onClick={() => setVisibleSection("home")} className={`hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all ${visibleSection === "home" ? "text-cyan-400" : ""}`}>
+                        <IoHomeOutline /> <p className='max-md:hidden'>About</p>
+                    </button>
+                    <button onClick={() => setVisibleSection("projects")} className={`hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all ${visibleSection === "projects" ? "text-cyan-400" : ""}`}>
+                        <GrProjects /><p className='max-md:hidden'>Projects</p>
+                    </button>
+                    <button onClick={() => setVisibleSection("skills")} className={`hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all ${visibleSection === "skills" ? "text-cyan-400" : ""}`}>
+                        <IoBookOutline /><p className='max-md:hidden'>Skills</p>
+                    </button>
+                    <button onClick={() => setVisibleSection("ChatBot")} className={`hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all ${visibleSection === "ChatBot" ? "text-cyan-400" : ""}`}>
+                        <RiRobot2Line /><p className='max-md:hidden'>ChatBot</p>
+                    </button>
                 </ul>
             </nav>
 
             {/* 🔵 HERO Section */}
             <div className='md:relative z-10 '>
 
-
                 <nav className=" z-50 flex justify-center py-5 xl:hidden">
                     <ul className="justify-between items-start text-sm text-gray-400  backdrop-blur-sm  bg-gradient-to-br from-gray-500/10 to-slate-600/10 gap-7 inline-flex rounded-2xl px-6 py-6 shadow-lg border border-white/10 ">
-                        <a href='#profile' className="hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all"><IoHomeOutline /> <p className='max-md:hidden'>About</p></a>
-                        <a href='#projectsSection' className="hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all"><GrProjects /><p className='max-md:hidden'>Projects</p></a>
-                        <a href='#skillsSection' className="hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all"><IoBookOutline /><p className='max-md:hidden'>Skills</p></a>
-                        <a href='#contacts' className="hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all"><IoCallOutline /><p className='max-md:hidden'>Contact</p></a>
+                        <button onClick={() => setVisibleSection("home")} className={`hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all ${visibleSection === "home" ? "text-cyan-400" : ""}`}>
+                            <IoHomeOutline /> <p className='max-md:hidden'>About</p>
+                        </button>
+                        <button onClick={() => setVisibleSection("projects")} className={`hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all ${visibleSection === "projects" ? "text-cyan-400" : ""}`}>
+                            <GrProjects /><p className='max-md:hidden'>Projects</p>
+                        </button>
+                        <button onClick={() => setVisibleSection("skills")} className={`hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all ${visibleSection === "skills" ? "text-cyan-400" : ""}`}>
+                            <IoBookOutline /><p className='max-md:hidden'>Skills</p>
+                        </button>
+                        <button onClick={() => setVisibleSection("ChatBot")} className={`hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all ${visibleSection === "ChatBot" ? "text-cyan-400" : ""}`}>
+                            <RiRobot2Line /><p className='max-md:hidden'>ChatBot</p>
+                        </button>
                     </ul>
                 </nav>
-                {/* profile */}
-                <section className="md:min-h-screen flex max-xl:flex-col items-center justify-evenly px-8 bg-transparent max-md:gap-14"
+
+
+                {/* Home/Profile section*/}
+                <section className={visibleSection !== "home" ? "hidden" : "md:min-h-screen flex max-xl:flex-col items-center justify-evenly px-8 bg-transparent max-md:gap-14"}
                     id='profile'>
 
                     {/* bio and icons */}
                     <div className="text-white max-w-sm mr-10 max-md:mt-10 items-center max-xl:flex-col max-md:flex">
                         <h1 className="text-4xl font-bold mb-4 max-md:text-center">👋 Welcome to My Portfolio</h1>
                         <p className="text-lg text-gray-300 max-md:text-center">
-                            I’m Sahil Sharma — building intelligent interfaces, futuristic designs, and scalable web solutions.
+                            I&apos;m Sahil Sharma — building intelligent interfaces, futuristic designs, and scalable web solutions.
                         </p>
                         <SocialMediaIconsRow />
                     </div>
@@ -256,8 +279,9 @@ function StarFieldWithLight() {
                 </section>
 
 
+                {/* Skills section */}
                 <section
-                    className="px-6 py-20 bg-transparent 2xl:mx-44 xl:mx-40 relative overflow-hidden"
+                    className={visibleSection !== "skills" ? "hidden" : "px-6 py-20 bg-transparent 2xl:mx-44 xl:mx-40 relative overflow-hidden"}
                     id='skillsSection'
                 >
 
@@ -321,34 +345,22 @@ function StarFieldWithLight() {
                         </div>
                     </div>
 
-
                 </section>
 
 
-                <section id='projectsSection'>
+                {/* Projects section */}
+                <section className={visibleSection !== "projects" ? "hidden" : ""} id='projectsSection'>
                     <ProjectsSection />
                 </section>
+                <section id="chatbot" className={visibleSection !== "ChatBot" ? "hidden" : "visible h-screen sm:px-20 py-10 max-sm:px-5"}>
 
-                <footer className="bg-gray-950 text-white py-4" id='contacts'>
-                    <div className="container mx-auto flex justify-center gap-6 text-lg">
-                        <a href="https://www.linkedin.com/in/sahil-sharma-822a752a9/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400">
-                            <FaLinkedin />
-                        </a>
-                        <a href="mailto:sahilbhaisharma1212@gmail.com" className="hover:text-red-400">
-                            <FaEnvelope />
-                        </a>
-                        <a href="https://github.com/SahilSharma1212" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
-                            <FaGithub />
-                        </a>
-                        <a href="https://vercel.com/sahil-sharmas-projects-ac471dc4" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                            <SiVercel />
-                        </a>
-                    </div>
-                    <p className="text-center text-sm mt-3 opacity-70">
-                        © {new Date().getFullYear()} Sahil Sharma. All rights reserved.
-                    </p>
-                </footer>
+                    <ChatBot />
+                </section>
+
+
             </div>
+
+
 
 
 

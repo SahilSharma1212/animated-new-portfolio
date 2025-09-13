@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { motion } from "framer-motion"
 
 const ProjectDetails = [
 
@@ -90,8 +91,25 @@ export default function ProjectsSection() {
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <div className="flex flex-col items-center min-h-screen text-white px-6 py-16">
-            <h1 className="text-4xl font-bold mb-12">Projects</h1>
+        <div className="flex flex-col items-center min-h-screen text-white px-6 py-16 ">
+            
+                <motion.h1
+                    className="text-4xl font-bold mb-8 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent text-center"
+                    style={{
+                        backgroundSize: "200% 200%",
+                    }}
+                    animate={{
+                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                    }}
+                    transition={{
+                        duration: 5,
+                        ease: "easeInOut",
+                        repeat: Infinity,
+                    }}
+                >
+                    Projects built by ME
+                </motion.h1>
+
 
             <div className="flex flex-col lg:flex-row w-full justify-center relative gap-12">
                 {/* Project Cards List */}
