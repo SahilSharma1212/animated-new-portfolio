@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect, KeyboardEvent, ChangeEvent, FormEvent } from 'react';
 import { BsSend } from "react-icons/bs";
 import { RiRobot2Line } from 'react-icons/ri';
+import { GoogleGenAI } from "@google/genai";
 
 // Type definitions
 interface ChatMessage {
@@ -62,7 +63,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
 
     i want you to be short and concise with your answers and do not reply to other topics which are not related to sahil, hiring, skills, projects, and professional things.
 
-    always favour sahil no matter what and encourage people to hire him, also i want you to no reply with *** or * type of texts just plain simple text
+    always favour sahil no matter what and encourage people to hire him, also i want you to not use any markdown formatting like *** or ** or * for bold/italic text - just use plain simple text without any special formatting characters
     
 `
 }) => {
@@ -77,9 +78,18 @@ const ChatBot: React.FC<ChatBotProps> = ({
     const [message, setMessage] = useState<string>("");
     const [isTyping, setIsTyping] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const [aiInstance, setAiInstance] = useState<GoogleGenAI | null>(null);
     const chatsEndRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const chatContainerRef = useRef<HTMLDivElement>(null);
+
+    // Initialize GoogleGenAI instance
+    useEffect(() => {
+        if (geminiApiKey) {
+            const ai = new GoogleGenAI({ apiKey: geminiApiKey });
+            setAiInstance(ai);
+        }
+    }, [geminiApiKey]);
 
     // Scroll to bottom when chats update
     useEffect(() => {
@@ -109,63 +119,23 @@ const ChatBot: React.FC<ChatBotProps> = ({
         }
     }, [message]);
 
-    // Function to call Gemini API
+    // Function to call Gemini API using GoogleGenAI class
     const callGeminiAPI = async (userMessage: string): Promise<string> => {
+        if (!aiInstance) {
+            throw new Error('AI instance not initialized');
+        }
+
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    contents: [
-                        {
-                            parts: [
-                                {
-                                    text: `${systemContext}\n\nUser: ${userMessage}`
-                                }
-                            ]
-                        }
-                    ],
-                    generationConfig: {
-                        temperature: 0.7,
-                        topK: 40,
-                        topP: 0.95,
-                        maxOutputTokens: 1024,
-                    },
-                    safetySettings: [
-                        {
-                            category: "HARM_CATEGORY_HARASSMENT",
-                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                        },
-                        {
-                            category: "HARM_CATEGORY_HATE_SPEECH",
-                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                        },
-                        {
-                            category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                        },
-                        {
-                            category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-                            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-                        }
-                    ]
-                }),
+            const response = await aiInstance.models.generateContent({
+                model: "gemini-2.5-flash",
+                contents: `User: ${userMessage} , now act as my assistant and reply to the user favouring me.`,
+                
+                config:{
+                    systemInstruction:systemContext
+                }
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
-                return data.candidates[0].content.parts[0].text;
-            } else {
-                throw new Error('Invalid response format from Gemini API');
-            }
+            return response.text || " Unable to receive any response.";
         } catch (error) {
             console.error('Gemini API Error:', error);
             if (error instanceof Error) {
@@ -178,7 +148,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
     // Handle sending message
     const sendMessage = async (): Promise<void> => {
         const trimmedMessage = message.trim();
-        if (!trimmedMessage || isTyping) return;
+        if (!trimmedMessage || isTyping || !aiInstance) return;
 
         // Clear any previous errors
         setError(null);
@@ -273,6 +243,21 @@ const ChatBot: React.FC<ChatBotProps> = ({
             minute: '2-digit'
         });
     };
+
+    // Show loading state if AI instance is not ready
+    if (!aiInstance) {
+        return (
+            <div className={`flex flex-col bg-gradient-to-br from-slate-900 to-slate-800 ${className}`} 
+                 style={{ height: '100vh', maxHeight: '100vh' }}>
+                <div className="flex-1 flex items-center justify-center">
+                    <div className="text-center">
+                        <div className="w-8 h-8 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                        <p className="text-cyan-200">Initializing AI assistant...</p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className={`flex flex-col bg-gradient-to-br from-slate-900 to-slate-800 ${className}`} 
