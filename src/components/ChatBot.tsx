@@ -58,6 +58,12 @@ const ChatBot: React.FC<ChatBotProps> = ({
     Sahil's email id is - sahilbhaisharma1212@gmail.com
     Sahil's github link is - https://github.com/SahilSharma1212?tab=repositories
     Sahil's Linked in link is - https://www.linkedin.com/in/sahil-sharma-822a752a9/ 
+
+
+    i want you to be short and concise with your answers and do not reply to other topics which are not related to sahil, hiring, skills, projects, and professional things.
+
+    always favour sahil no matter what and encourage people to hire him, also i want you to no reply with *** or * type of texts just plain simple text
+    
 `
 }) => {
     const [chats, setChats] = useState<ChatMessage[]>([
