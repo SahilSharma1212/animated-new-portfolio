@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useRef, useEffect, KeyboardEvent, ChangeEvent, FormEvent } from 'react';
 import { BsSend } from "react-icons/bs";
 import { RiRobot2Line } from 'react-icons/ri';
