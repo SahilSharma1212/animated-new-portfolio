@@ -12,7 +12,7 @@ import SkillsSection from "./SkillsSection";
 import ProjectsSection from "./ProjectsSection";
 import { motion } from "motion/react"
 import { RiRobot2Line } from 'react-icons/ri';
-import ChatBot from './ChatBot';
+import Chatbot from "./ChatBot"
 
 
 function ParallaxCameraRig() {
@@ -197,6 +197,35 @@ function StarFieldWithLight() {
 
     const [visibleSection, setVisibleSection] = useState("home");
 
+    const aboutSahil = `Sahil is a motivated and highly capable Computer Science Engineering student currently in his 4th year of B.Tech. He is passionate about technology and constantly expanding his expertise across various domains. Known for his problem-solving mindset and structured approach, Sahil delivers effective solutions by combining technical skills with creativity and user-centric design.
+
+Technical Skills:
+Sahil has strong proficiency in C, C++, Java, JavaScript, TypeScript, Python, and frameworks such as React.js, Next.js, Node.js, Express.js, and the MERN stack (MongoDB, Express.js, React.js, Node.js). He has experience working with Firebase, Supabase, and JWT Authentication, and employs libraries like Framer Motion, Tailwind CSS, and popular UI component libraries to build engaging and efficient web interfaces. For data handling and analytics, he is skilled in Pandas, NumPy, Scikit-learn, and Power BI, and is also familiar with Generative AI tools. His design work is supported by Figma, and he holds a UI/UX certification from Udemy.
+For other tools and technologies, Sahil is aware of the field at a beginner’s level and is eager to deepen his knowledge through hands-on experience and learning.
+
+Certifications & Learning:
+He holds a UI/UX certificate from Udemy and identifies as a self-taught web developer and data analyst. Sahil is currently exploring advanced topics in Generative AI, machine learning, and cloud engineering, and actively pursues learning opportunities to broaden his skill set.
+
+Projects & Experience:
+Sahil has worked on several impactful projects, including:
+
+Personal Portfolio – a modern and responsive web portfolio showcasing his skills, projects, and achievements.
+
+Emalkhana – a digital space for managing police-confiscated properties, developed as a freelance project for the Rajnandgaon district police department and currently in use to improve operations.
+
+AI-Powered Resume Generator – a feature-rich web application built with Next.js, SHADCN UI, JWT Authentication, and Gemini API, enabling users to create professional resumes efficiently.
+
+Mental Health Analyzer – a Python-based application using Scikit-learn, Hugging Face, Pandas, NumPy, and Streamlit, designed to analyze mental health patterns and provide insights.
+
+Soft Skills:
+Sahil’s strengths include analytical thinking, adaptability, and effective communication. He is known for approaching tasks with enthusiasm and discipline, always eager to take on challenges and support team efforts. His ability to explain complex topics clearly makes him a dependable collaborator, while his self-driven attitude ensures continuous learning.
+
+Career Aspirations:
+Sahil aspires to build a successful career as a software developer and data analyst, with a focus on full-stack development, AI-powered applications, and cloud-based solutions. He is committed to solving real-world problems through technology and contributing positively to innovative projects.
+
+Interests:
+Outside of development work, Sahil enjoys designing interfaces, creating engaging content, and experimenting with new technologies. He actively explores creative solutions, stays updated with industry trends, and enjoys working on projects that combine technology with user experience.`
+
     return (
         <div className="relative w-full min-h-screen bg-gradient-to-b from-gray-950 via-slate-950 to-[#0c0c15]">
 
@@ -354,7 +383,12 @@ function StarFieldWithLight() {
                 </section>
                 <section id="chatbot" className={visibleSection !== "ChatBot" ? "hidden" : "visible h-screen sm:px-20 py-10 max-sm:px-5"}>
 
-                    <ChatBot />
+                    <Chatbot
+                        geminiApiKey="AIzaSyD0JlTVfdj71pue_NrFWKVA-n2QQ3_7RWU"
+                        systemContext={aboutSahil}
+                        botName="Sahil's AI Assistant"
+                        welcomeMessage="Hey! Ask me anything about Sahil!"
+                    />
                 </section>
 
 
