@@ -339,7 +339,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
                         </div>
                     )}
 
-                    <div ref={chatsEndRef} style={{ height: '1px' }} />
+                    <div ref={chatsEndRef} style={{ height: '20px', flexShrink: 0 }} />
                 </div>
             </main>
 
