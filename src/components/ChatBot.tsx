@@ -30,7 +30,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
 
     Technical Skills:
     Sahil has strong proficiency in C, C++, Java, JavaScript, TypeScript, Python, and frameworks such as React.js, Next.js, Node.js, Express.js, and the MERN stack (MongoDB, Express.js, React.js, Node.js). He has experience working with Firebase, Supabase, and JWT Authentication, and employs libraries like Framer Motion, Tailwind CSS, and popular UI component libraries to build engaging and efficient web interfaces. For data handling and analytics, he is skilled in Pandas, NumPy, Scikit-learn, and Power BI, and is also familiar with Generative AI tools. His design work is supported by Figma, and he holds a UI/UX certification from Udemy.
-    For other tools and technologies, Sahil is aware of the field at a beginner’s level and is eager to deepen his knowledge through hands-on experience and learning.
+    For other tools and technologies, Sahil is aware of the field at a beginner's level and is eager to deepen his knowledge through hands-on experience and learning.
 
     Certifications & Learning:
     He holds a UI/UX certificate from Udemy and identifies as a self-taught web developer and data analyst. Sahil is currently exploring advanced topics in Generative AI, machine learning, and cloud engineering, and actively pursues learning opportunities to broaden his skill set.
@@ -47,7 +47,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
     Mental Health Analyzer – a Python-based application using Scikit-learn, Hugging Face, Pandas, NumPy, and Streamlit, designed to analyze mental health patterns and provide insights.
 
     Soft Skills:
-    Sahil’s strengths include analytical thinking, adaptability, and effective communication. He is known for approaching tasks with enthusiasm and discipline, always eager to take on challenges and support team efforts. His ability to explain complex topics clearly makes him a dependable collaborator, while his self-driven attitude ensures continuous learning.
+    Sahil's strengths include analytical thinking, adaptability, and effective communication. He is known for approaching tasks with enthusiasm and discipline, always eager to take on challenges and support team efforts. His ability to explain complex topics clearly makes him a dependable collaborator, while his self-driven attitude ensures continuous learning.
 
     Career Aspirations:
     Sahil aspires to build a successful career as a software developer and data analyst, with a focus on full-stack development, AI-powered applications, and cloud-based solutions. He is committed to solving real-world problems through technology and contributing positively to innovative projects.
@@ -73,18 +73,33 @@ const ChatBot: React.FC<ChatBotProps> = ({
     const [error, setError] = useState<string | null>(null);
     const chatsEndRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const chatContainerRef = useRef<HTMLDivElement>(null);
 
     // Scroll to bottom when chats update
     useEffect(() => {
-        chatsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [chats]);
+        const scrollToBottom = () => {
+            if (chatsEndRef.current) {
+                chatsEndRef.current.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'end'
+                });
+            }
+        };
+        
+        // Small delay to ensure DOM is updated
+        const timeoutId = setTimeout(scrollToBottom, 100);
+        return () => clearTimeout(timeoutId);
+    }, [chats, isTyping]);
 
-    // Auto-resize textarea
+    // Auto-resize textarea with proper constraints
     useEffect(() => {
         const textarea = textareaRef.current;
         if (textarea) {
-            textarea.style.height = 'auto';
-            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+            // Reset height to calculate new height
+            textarea.style.height = '48px'; // Min height
+            const scrollHeight = textarea.scrollHeight;
+            const maxHeight = 120; // Max height
+            textarea.style.height = Math.min(scrollHeight, maxHeight) + 'px';
         }
     }, [message]);
 
@@ -254,25 +269,31 @@ const ChatBot: React.FC<ChatBotProps> = ({
     };
 
     return (
-        <div className={`h-screen max-h-screen flex flex-col bg-gradient-to-br from-slate-900 to-slate-800 ${className}`}>
+        <div className={`flex flex-col bg-gradient-to-br from-slate-900 to-slate-800 ${className}`} 
+             style={{ height: '100vh', maxHeight: '100vh' }}>
+            
             {/* Fixed Header */}
-            <header className='flex-shrink-0 p-4 border-b border-cyan-500/20 bg-black/40 backdrop-blur-sm'>
+            <header className='flex-shrink-0 px-4 py-3 sm:p-4 border-b border-cyan-500/20 bg-black/40 backdrop-blur-sm'>
                 <div className='flex items-center justify-center gap-3'>
-                    <RiRobot2Line size={32} className='text-cyan-400' aria-hidden="true" />
-                    <h1 className='text-lg font-medium text-cyan-100'>{botName}</h1>
+                    <RiRobot2Line size={28} className='text-cyan-400 sm:w-8 sm:h-8' aria-hidden="true" />
+                    <h1 className='text-base sm:text-lg font-medium text-cyan-100'>{botName}</h1>
                 </div>
                 {error && (
-                    <div className='mt-2 p-2 bg-red-500/20 border border-red-500/30 rounded-lg text-red-200 text-sm text-center'>
+                    <div className='mt-2 p-2 bg-red-500/20 border border-red-500/30 rounded-lg text-red-200 text-xs sm:text-sm text-center'>
                         <p>⚠️ API Error: {error}</p>
                     </div>
                 )}
             </header>
 
             {/* Chat Messages Container */}
-            <main className='flex-1 min-h-0 p-4 overflow-hidden'>
+            <main className='flex-1 min-h-0 px-2 sm:px-4 py-2 sm:py-4'>
                 <div
-                    className='h-full overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-cyan-500/20 scrollbar-track-transparent'
-                    style={{ scrollbarWidth: 'thin' }}
+                    ref={chatContainerRef}
+                    className='h-full overflow-y-auto space-y-2 sm:space-y-3 pr-1 sm:pr-2'
+                    style={{ 
+                        scrollbarWidth: 'thin',
+                        scrollbarColor: 'rgba(34, 211, 238, 0.2) transparent'
+                    }}
                     role="log"
                     aria-live="polite"
                     aria-label="Chat messages"
@@ -286,7 +307,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
                         >
                             <div
                                 className={`
-                                    max-w-[80%] sm:max-w-[70%] p-3 rounded-2xl text-white text-sm leading-relaxed
+                                    max-w-[85%] sm:max-w-[80%] md:max-w-[70%] p-2.5 sm:p-3 rounded-2xl text-white text-sm leading-relaxed
                                     ${chat.source === "user"
                                         ? "bg-blue-600 rounded-br-md"
                                         : "bg-cyan-700 rounded-bl-md"
@@ -307,7 +328,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
                     {/* Typing indicator */}
                     {isTyping && (
                         <div className="flex justify-start">
-                            <div className="bg-cyan-700 rounded-2xl rounded-bl-md p-3 max-w-[80%] sm:max-w-[70%]">
+                            <div className="bg-cyan-700 rounded-2xl rounded-bl-md p-2.5 sm:p-3 max-w-[85%] sm:max-w-[80%] md:max-w-[70%]">
                                 <div className="flex space-x-1">
                                     <div className="w-2 h-2 bg-cyan-300 rounded-full animate-bounce"></div>
                                     <div className="w-2 h-2 bg-cyan-300 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
@@ -318,13 +339,13 @@ const ChatBot: React.FC<ChatBotProps> = ({
                         </div>
                     )}
 
-                    <div ref={chatsEndRef} />
+                    <div ref={chatsEndRef} style={{ height: '1px' }} />
                 </div>
             </main>
 
             {/* Fixed Input Section */}
-            <footer className='flex-shrink-0 p-4 border-t border-cyan-500/20 bg-black/40 backdrop-blur-sm'>
-                <form onSubmit={handleSubmit} className='flex gap-2 max-w-4xl mx-auto'>
+            <footer className='flex-shrink-0 px-3 py-3 sm:p-4 border-t border-cyan-500/20 bg-black/40 backdrop-blur-sm'>
+                <form onSubmit={handleSubmit} className='flex gap-2 sm:gap-3 max-w-4xl mx-auto'>
                     <div className='flex-1 relative'>
                         <label htmlFor="message-input" className="sr-only">
                             Type your message
@@ -339,17 +360,17 @@ const ChatBot: React.FC<ChatBotProps> = ({
                             rows={1}
                             disabled={isTyping}
                             className='
-                                w-full px-4 py-3 rounded-2xl resize-none
+                                w-full px-3 py-3 sm:px-4 rounded-2xl resize-none
                                 bg-slate-700/50 border border-slate-600/50
                                 text-white placeholder-slate-400
                                 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent
                                 disabled:opacity-50 disabled:cursor-not-allowed
                                 transition-all duration-200
-                                min-h-[50px] max-h-[120px]
+                                text-sm sm:text-base
                             '
                             style={{
-                                height: 'auto',
-                                minHeight: '50px'
+                                minHeight: '48px',
+                                maxHeight: '120px'
                             }}
                             maxLength={1000}
                             aria-describedby="message-help"
@@ -368,12 +389,16 @@ const ChatBot: React.FC<ChatBotProps> = ({
                             rounded-full text-white transition-all duration-200
                             focus:outline-none focus:ring-2 focus:ring-cyan-400/50
                             disabled:cursor-not-allowed
+                            active:scale-95
                         '
                         aria-label="Send message"
                     >
-                        <BsSend size={18} aria-hidden="true" />
+                        <BsSend size={16} className="sm:w-[18px] sm:h-[18px]" aria-hidden="true" />
                     </button>
                 </form>
+                
+                {/* Safe area padding for mobile devices */}
+                <div className="h-safe-area-inset-bottom sm:hidden"></div>
             </footer>
         </div>
     );
