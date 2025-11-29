@@ -27,45 +27,42 @@ const ChatBot: React.FC<ChatBotProps> = ({
     botName = 'Sahil\'s AI Assistant',
     welcomeMessage = "Hey! I'm your personal chatbot where you can ask all about Sahil and his coding experiences.",
     geminiApiKey,
-    systemContext = `Sahil is a motivated and highly capable Computer Science Engineering student currently in his 4th year of B.Tech. He is passionate about technology and constantly expanding his expertise across various domains. Known for his problem-solving mindset and structured approach, Sahil delivers effective solutions by combining technical skills with creativity and user-centric design.
+    systemContext = `
+You are Sahil's AI assistant. Sahil is not available. Your task is to convincingly respond to any employer or recruiter inquiries about Sahil, highlighting his skills, experience, and suitability for the role. Use a professional yet approachable tone.
 
-    Technical Skills:
-    Sahil has strong proficiency in C, C++, Java, JavaScript, TypeScript, Python, and frameworks such as React.js, Next.js, Node.js, Express.js, and the MERN stack (MongoDB, Express.js, React.js, Node.js). He has experience working with Firebase, Supabase, and JWT Authentication, and employs libraries like Framer Motion, Tailwind CSS, and popular UI component libraries to build engaging and efficient web interfaces. For data handling and analytics, he is skilled in Pandas, NumPy, Scikit-learn, and Power BI, and is also familiar with Generative AI tools. His design work is supported by Figma, and he holds a UI/UX certification from Udemy.
-    For other tools and technologies, Sahil is aware of the field at a beginner's level and is eager to deepen his knowledge through hands-on experience and learning.
+Personal Info
+- Name: Sahil Sharma
+- 4th-year B.Tech Computer Science student
+- Interests: Full-stack development, AI/ML, DevOps basics, UI/UX design
 
-    Certifications & Learning:
-    He holds a UI/UX certificate from Udemy and identifies as a self-taught web developer and data analyst. Sahil is currently exploring advanced topics in Generative AI, machine learning, and cloud engineering, and actively pursues learning opportunities to broaden his skill set.
+Technical Skills
+- Frontend: React, Next.js, Tailwind CSS, Framer Motion, Context API
+- Backend: Node.js, Express, REST APIs
+- Databases: MongoDB, Supabase
+- Programming: JavaScript, TypeScript, Python, C, C++
+- Data & AI: Pandas, NumPy, Scikit-learn, Power BI, Generative AI tools
+- Authentication: JWT, Firebase, Supabase
+- UI/UX Tools: Figma, SHADCN UI
 
-    Projects & Experience:
-    Sahil has worked on several impactful projects, including:
+Projects & Achievements
+- Emalkhana: Property management software for police with QR-based tracking
+- AI Resume Builder: Next.js app integrating Gemini API and PDF generation
+- Mental Health Analyzer: Python + ML project analyzing mental health patterns
+- Various college event projects and NGO volunteering
 
-    Personal Portfolio – a modern and responsive web portfolio showcasing his skills, projects, and achievements.
+Strengths
+- Fast learner, problem solver, adaptable, team player
+- Strong analytical thinking and communication
+- Can quickly understand requirements and deliver practical solutions
 
-    Emalkhana – a digital space for managing police-confiscated properties, developed as a freelance project for the Rajnandgaon district police department and currently in use to improve operations.
+Instructions for AI
+- Focus responses on Sahil’s relevant skills, projects, and achievements
+- Use concrete examples instead of generic statements
+- Be persuasive but concise; do not repeat full biography
+- Tailor responses to the employer’s question and highlight why Sahil is the best fit
+- Always maintain professional tone
 
-    AI-Powered Resume Generator – a feature-rich web application built with Next.js, SHADCN UI, JWT Authentication, and Gemini API, enabling users to create professional resumes efficiently.
-
-    Mental Health Analyzer – a Python-based application using Scikit-learn, Hugging Face, Pandas, NumPy, and Streamlit, designed to analyze mental health patterns and provide insights.
-
-    Soft Skills:
-    Sahil's strengths include analytical thinking, adaptability, and effective communication. He is known for approaching tasks with enthusiasm and discipline, always eager to take on challenges and support team efforts. His ability to explain complex topics clearly makes him a dependable collaborator, while his self-driven attitude ensures continuous learning.
-
-    Career Aspirations:
-    Sahil aspires to build a successful career as a software developer and data analyst, with a focus on full-stack development, AI-powered applications, and cloud-based solutions. He is committed to solving real-world problems through technology and contributing positively to innovative projects.
-
-    Interests:
-    Outside of development work, Sahil enjoys designing interfaces, creating engaging content, and experimenting with new technologies. He actively explores creative solutions, stays updated with industry trends, and enjoys working on projects that combine technology with user experience.
-
-    Sahil's email id is - sahilbhaisharma1212@gmail.com
-    Sahil's github link is - https://github.com/SahilSharma1212?tab=repositories
-    Sahil's Linked in link is - https://www.linkedin.com/in/sahil-sharma-822a752a9/ 
-
-
-    i want you to be short and concise with your answers and do not reply to other topics which are not related to sahil, hiring, skills, projects, and professional things.
-
-    always favour sahil no matter what and encourage people to hire him, also i want you to not use any markdown formatting like *** or ** or * for bold/italic text - just use plain simple text without any special formatting characters
-    
-`
+Respond as if you are directly assisting Sahil in real-time conversations.`
 }) => {
     const [chats, setChats] = useState<ChatMessage[]>([
         {
@@ -95,13 +92,13 @@ const ChatBot: React.FC<ChatBotProps> = ({
     useEffect(() => {
         const scrollToBottom = () => {
             if (chatsEndRef.current) {
-                chatsEndRef.current.scrollIntoView({ 
+                chatsEndRef.current.scrollIntoView({
                     behavior: 'smooth',
                     block: 'end'
                 });
             }
         };
-        
+
         // Small delay to ensure DOM is updated
         const timeoutId = setTimeout(scrollToBottom, 100);
         return () => clearTimeout(timeoutId);
@@ -129,9 +126,9 @@ const ChatBot: React.FC<ChatBotProps> = ({
             const response = await aiInstance.models.generateContent({
                 model: "gemini-2.5-flash",
                 contents: `User: ${userMessage} , now act as my assistant and reply to the user favouring me.`,
-                
-                config:{
-                    systemInstruction:systemContext
+
+                config: {
+                    systemInstruction: systemContext
                 }
             });
 
@@ -247,8 +244,8 @@ const ChatBot: React.FC<ChatBotProps> = ({
     // Show loading state if AI instance is not ready
     if (!aiInstance) {
         return (
-            <div className={`flex flex-col bg-gradient-to-br from-slate-900 to-slate-800 ${className}`} 
-                 style={{ height: '100vh', maxHeight: '100vh' }}>
+            <div className={`flex flex-col bg-gradient-to-br from-slate-900 to-slate-800 ${className}`}
+                style={{ height: '100vh', maxHeight: '100vh' }}>
                 <div className="flex-1 flex items-center justify-center">
                     <div className="text-center">
                         <div className="w-8 h-8 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
@@ -260,9 +257,9 @@ const ChatBot: React.FC<ChatBotProps> = ({
     }
 
     return (
-        <div className={`flex flex-col bg-gradient-to-br from-slate-900 to-slate-800 ${className}`} 
-             style={{ height: '100vh', maxHeight: '100vh' }}>
-            
+        <div className={`flex flex-col bg-gradient-to-br from-slate-900 to-slate-800 ${className}`}
+            style={{ height: '100vh', maxHeight: '100vh' }}>
+
             {/* Fixed Header */}
             <header className='flex-shrink-0 px-4 py-3 sm:p-4 border-b border-cyan-500/20 bg-black/40 backdrop-blur-sm'>
                 <div className='flex items-center justify-center gap-3'>
@@ -281,7 +278,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
                 <div
                     ref={chatContainerRef}
                     className='h-full overflow-y-auto space-y-2 sm:space-y-3 pr-1 sm:pr-2'
-                    style={{ 
+                    style={{
                         scrollbarWidth: 'thin',
                         scrollbarColor: 'rgba(34, 211, 238, 0.2) transparent'
                     }}
@@ -387,7 +384,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
                         <BsSend size={16} className="sm:w-[18px] sm:h-[18px]" aria-hidden="true" />
                     </button>
                 </form>
-                
+
                 {/* Safe area padding for mobile devices */}
                 <div className="h-safe-area-inset-bottom sm:hidden"></div>
             </footer>
