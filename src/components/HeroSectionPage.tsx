@@ -227,7 +227,7 @@ Interests:
 Outside of development work, Sahil enjoys designing interfaces, creating engaging content, and experimenting with new technologies. He actively explores creative solutions, stays updated with industry trends, and enjoys working on projects that combine technology with user experience.`
 
     return (
-        <div className="relative w-full min-h-screen bg-gradient-to-b from-gray-950 via-slate-950 to-[#0c0c15]">
+        <div className="relative w-full min-h-screen bg-gradient-to-b from-gray-950 to-slate-950 ">
 
 
             {/* 🔵 3D Background Canvas (fixed behind everything) */}
@@ -264,7 +264,7 @@ Outside of development work, Sahil enjoys designing interfaces, creating engagin
             <div className='md:relative z-10 '>
 
                 <nav className=" z-50 flex justify-center py-5 xl:hidden">
-                    <ul className="justify-between items-start text-sm text-gray-400  backdrop-blur-sm  bg-gradient-to-br from-gray-500/10 to-slate-600/10 gap-7 inline-flex rounded-2xl px-6 py-6 shadow-lg border border-white/10 ">
+                    <ul className="justify-between items-start text-sm text-gray-400  backdrop-blur-sm  bg-gradient-to-br from-gray-500/10 to-blue-600/10 gap-7 inline-flex rounded-2xl px-6 py-6 shadow-lg border border-white/10 ">
                         <button onClick={() => setVisibleSection("home")} className={`hover:text-white cursor-pointer flex items-center justify-start gap-4 font-semibold transition-all ${visibleSection === "home" ? "text-cyan-400" : ""}`}>
                             <IoHomeOutline /> <p className='max-md:hidden'>About</p>
                         </button>
