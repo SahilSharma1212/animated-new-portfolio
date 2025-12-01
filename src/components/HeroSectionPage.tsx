@@ -227,7 +227,7 @@ Interests:
 Outside of development work, Sahil enjoys designing interfaces, creating engaging content, and experimenting with new technologies. He actively explores creative solutions, stays updated with industry trends, and enjoys working on projects that combine technology with user experience.`
 
     return (
-        <div className="relative w-full min-h-screen bg-gradient-to-b from-gray-950 to-slate-950 ">
+        <div className="relative w-full min-h-screen bg-gradient-to-b from-gray-950 to-slate-950  scrollbar-dark scrollbar-dark">
 
 
             {/* 🔵 3D Background Canvas (fixed behind everything) */}
@@ -261,7 +261,7 @@ Outside of development work, Sahil enjoys designing interfaces, creating engagin
             </nav>
 
             {/* 🔵 HERO Section */}
-            <div className='md:relative z-10 '>
+            <div className='md:relative z-10 scrollbar-dark'>
 
                 <nav className=" z-50 flex justify-center py-5 xl:hidden">
                     <ul className="justify-between items-start text-sm text-gray-400  backdrop-blur-sm  bg-gradient-to-br from-gray-500/10 to-blue-600/10 gap-7 inline-flex rounded-2xl px-6 py-6 shadow-lg border border-white/10 ">
@@ -282,7 +282,7 @@ Outside of development work, Sahil enjoys designing interfaces, creating engagin
 
 
                 {/* Home/Profile section*/}
-                <section className={visibleSection !== "home" ? "hidden" : "md:min-h-screen flex max-xl:flex-col items-center justify-evenly px-8 bg-transparent max-md:gap-14"}
+                <section className={visibleSection !== "home" ? "hidden" : "md:min-h-screen flex max-xl:flex-col items-center justify-evenly px-8 bg-transparent max-md:gap-14  scrollbar-dark"}
                     id='profile'>
 
                     {/* bio and icons */}
@@ -381,7 +381,7 @@ Outside of development work, Sahil enjoys designing interfaces, creating engagin
                 <section className={visibleSection !== "projects" ? "hidden" : ""} id='projectsSection'>
                     <ProjectsSection />
                 </section>
-                <section id="chatbot" className={visibleSection !== "ChatBot" ? "hidden" : "visible h-screen sm:px-20 py-10 max-sm:px-5"}>
+                <section id="chatbot" className={visibleSection !== "ChatBot" ? "hidden" : "visible h-[90vh] scale-90 sm:px-20 py-10 max-sm:px-5  scrollbar-dark"}>
 
                     <Chatbot
                         geminiApiKey="AIzaSyD0JlTVfdj71pue_NrFWKVA-n2QQ3_7RWU"
@@ -393,7 +393,6 @@ Outside of development work, Sahil enjoys designing interfaces, creating engagin
 
 
             </div>
-
 
 
 

@@ -20,7 +20,7 @@ function App() {
 
   return (
     <>
-    <div className=" bg-gradient-to-b from-gray-950 via-slate-950 to-[hsl(240,27%,6%)] pb-5 ">
+    <div className="bg-gradient-to-b from-blue-950 via-blue-950 to-[hsl(227,88%,6%)] pb-5 scrollbar-dark">
       <motion.div
         className="intro-section"
         initial={{ y: 440, opacity: 1 }}

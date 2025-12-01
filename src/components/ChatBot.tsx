@@ -244,7 +244,7 @@ Respond as if you are directly assisting Sahil in real-time conversations.`
     // Show loading state if AI instance is not ready
     if (!aiInstance) {
         return (
-            <div className={`flex flex-col bg-gradient-to-br from-slate-900 to-slate-800 ${className}`}
+            <div className={`flex flex-col bg-gradient-to-br scale-90 from-slate-900 to-slate-800 ${className} scrollbar-dark`}
                 style={{ height: '100vh', maxHeight: '100vh' }}>
                 <div className="flex-1 flex items-center justify-center">
                     <div className="text-center">

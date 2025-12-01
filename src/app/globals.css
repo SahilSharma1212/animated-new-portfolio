@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.scrollbar-dark::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar-dark::-webkit-scrollbar-track {
+  background: #010c1c; /* dark gray track */
+}
+.scrollbar-dark::-webkit-scrollbar-thumb {
+  background-color: #0e448b; /* lighter purple thumb */
+  border-radius: 4px;
+}
+
